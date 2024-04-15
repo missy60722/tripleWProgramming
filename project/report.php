@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>統計數據</title>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a href="home.html">記帳</a>
+        <a href="account.php">我的帳本</a>
+        <a href="report.php">統計數據</a>
+        <a href="setting.php">設置</a>
+        <a href="logout.php">登出</a>
+    </aside>
+
+    <div id="chartTooltip" class="tooltip" style="opacity: 0;"></div>
+
+    <div class="chart-container">
+        <h1>統計數據</h1>
+        <div class="chart">
+            <h2>大類分析</h2>
+            <svg id="pieChart"></svg>
+        </div>
+        <div class="chart">
+            <h2>交易分析</h2>
+            <svg id="lineChart"></svg>
+        </div>
+        <div class="chart">
+            <h2>收支圖</h2>
+            <svg id="barChart"></svg>
+            <div id="legend"></div>
+        </div>
+        <div class="number-display">
+            <p>總覽：</p>
+            <p>總收入：<span id="totalIncome"></span></p>
+            <p>總支出：<span id="totalExpense"></span></p>
+            <p>餘額：<span id="balance"></span></p>
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

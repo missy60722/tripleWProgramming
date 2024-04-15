@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>首頁</title>
+    <script>
+        function toggleOtherCategory() {
+            var selectElement = document.getElementById("categorySelect");
+            var inputElement = document.getElementById("categoryInput");
+
+            if (selectElement.value === "其他") {
+                inputElement.style.display = "inline-block";
+                inputElement.required = true;
+            } else {
+                inputElement.style.display = "none";
+                inputElement.required = false;
+            }
+        }
+
+        function validateForm() {
+            let name = document.forms["accountForm"]["name"];
+            let amount = document.forms["accountForm"]["amount"];
+            let date = document.forms["accountForm"]["date"];
+            let categorySelect = document.forms["accountForm"]["categorySelect"];
+            let categoryInput = document.forms["accountForm"]["categoryInput"];
+            let type = document.forms["accountForm"]["type"];
+
+            if (name.value == "") {
+                alert("請輸入項目名稱");
+                name.focus();
+                return false;
+            }
+            if (amount.value == "" || isNaN(amount.value)) {
+                alert("請輸入有效金額");
+                amount.focus();
+                return false;
+            }
+            if (date.value == "") {
+                alert("請選擇日期");
+                date.focus();
+                return false;
+            }
+            if (categorySelect.value === "" || (categorySelect.value === "其他" && categoryInput.value === "")) {
+                alert("請選擇分類或輸入其他分類");
+                categorySelect.focus();
+                return false;
+            }
+            if (type.value == "") {
+                alert("請選擇類型");
+                type.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body id="account">
+    <aside class="sidebar">
+        <a href="home.html">記帳</a>
+        <a href="account.php">我的帳本</a>
+        <a href="report.php">統計數據</a>
+        <a href="setting.php">設置</a>
+        <a href="logout.php">登出</a>
+    </aside>
+
+    <div id="chartTooltip" class="tooltip" style="opacity: 0;"></div>
+
+    <div class="account">
+        <h2>記帳</h2>
+        <form name="accountForm" method="post" action="add_transaction.php">
+            <label for="name">項目名稱:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="amount">金額:</label>
+            <input type="number" id="amount" name="amount" step="1" required>
+            <label for="date">日期:</label>
+            <input type="date" id="date" name="date" required>
+            <label for="category">分類:</label>
+            <select id="categorySelect" name="categorySelect" onchange="toggleOtherCategory()">
+                <option value="">選擇分類</option>
+                <option value="食物">食物</option>
+                <option value="交通">交通</option>
+                <option value="娛樂">娛樂</option>
+                <option value="其他">其他</option>
+            </select>
+            <input type="text" id="categoryInput" name="categoryInput" style="display: none;" placeholder="其他分類">
+            <label for="type">類型:</label>
+            <select id="type" name="type" required>
+                <option value="支出">支出</option>
+                <option value="收入">收入</option>
+            </select>
+            <label for="note">備註:</label>
+            <input type="text" id="note" name="note">
+            <input type="submit" value="記 錄">
+        </form>
+    </div>
+
+    <div class="account-chart">
+        <h2>大類分析</h2>
+        <svg id="donutChart"></svg>
+        <div id="chartText">
+            <p>總收入：<span id="totalIncome"></span></p>
+            <p>總支出：<span id="totalExpense"></span></p>
+            <p>餘額：<span id="balance"></span></p>
+        </div>
+        <div id="legend"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>

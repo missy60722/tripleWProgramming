@@ -1,0 +1,349 @@
+@font-face {
+    font-family: 'ChenYuluoyan-Thin-Monospaced';
+    src: url(ChenYuluoyan-Thin-Monospaced.woff) format('woff');
+}
+
+* {
+    font-family: 'ChenYuluoyan-Thin-Monospaced', sans-serif;
+    font-size: 20px;
+}
+
+body {
+    background: linear-gradient(to right, #1a1619, #3b4245, #aab7bd, #eaeaea);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 300px;
+}
+
+.container h1 {
+    text-align: center;
+    color: #4c6e8b;
+    margin: 0;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.container h2 {
+    text-align: center;
+    color: #254665;
+    margin: 0 0 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.container input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    transition: border-color 0.3s ease;
+}
+
+.container input[type="text"],
+.container input[type="password"] {
+    width: 100%;
+    color: #4c6e8b;
+}
+
+.container input[type="submit"],
+.container input[type="reset"] {
+    background-color: #4c6e8b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.container input[type="submit"]:hover,
+.container input[type="reset"]:hover {
+    background-color: #607b92;
+}
+
+.container a {
+    display: block;
+    text-align: center;
+    color: #254665;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.container a:hover {
+    text-decoration: underline;
+    color: #314860;
+}
+
+/* 左側欄 */
+
+.sidebar {
+    position: fixed;
+    left: -200px;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #eaeaea;
+    padding: 20px;
+    transition: left 0.3s ease;
+    text-align: center;
+}
+
+.sidebar:hover {
+    left: 0;
+}
+
+.sidebar a {
+    display: block;
+    color: #254665;
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 900;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #aab7bd;
+}
+
+/* 記帳 */
+
+.account {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 600px;
+}
+
+.account h2 {
+    text-align: center;
+    color: #254665;
+    margin: 0 0 5px;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.account form {
+    display: flex;
+    flex-direction: column;
+}
+
+.account label {
+    margin-bottom: 5px;
+}
+
+.account input[type="text"],
+.account input[type="number"],
+.account input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    transition: border-color 0.3s ease;
+}
+
+.account select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    transition: border-color 0.3s ease;
+}
+
+.account input[type="submit"] {
+    background-color: #4c6e8b;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.account input[type="submit"]:hover {
+    background-color: #607b92;
+}
+
+.account-chart {
+    width: 500px;
+    height: 450px;
+    margin: 20px 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.account-chart h2 {
+    font-size: 30px;
+    margin-bottom: 0;
+    text-align: center;
+    color: #254665;
+}
+
+.account-chart svg {
+    display: block;
+    height: 350px;
+    width: 330px;
+    overflow: visible;
+}
+
+#donutChartContainer {
+    position: relative;
+}
+
+#chartText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    text-align: center;
+}
+
+#chartText p {
+    font-weight: 300;
+    margin: 5px 0;
+}
+
+/* 我的帳本 */
+
+.options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.options button {
+    background-color: #4c6e8b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.options button:hover {
+    background-color: #607b92;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 20px;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #4c6e8b;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+tr:first-child:hover {
+    background-color: #4c6e8b;
+}
+
+/* 統計數據 */
+
+.chart-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.chart-container h1 {
+    text-align: center;
+    color: #fff;
+    margin: 0 0 20px;
+    font-size: 40px;
+    font-weight: 900;
+}
+
+.chart {
+    width: 700px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chart h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #254665;
+}
+
+.number-display {
+    width: 400px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.number-display p {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #254665;
+}
+
+.number-display span {
+    font-size: 24px;
+    color: #4c6e8b;
+}
+
+.chart svg {
+    display: block;
+    margin: auto;
+    overflow: visible;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(58, 68, 73, 0.7);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 25px;
+    z-index: 2;
+}
