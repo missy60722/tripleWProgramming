@@ -2,7 +2,8 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>設置</title>
     <script>
@@ -80,8 +81,8 @@
         $sql_check_username = "SELECT COUNT(*) as count FROM Users WHERE username = '$new_username' AND id != '$user_id'";
         $result_check_username = mysqli_query($conn, $sql_check_username);
         $row_check_username = mysqli_fetch_assoc($result_check_username);
-        if ($row_check_username['count'] > 0) {
-            function_alert('該帳號已被使用，請選擇另一個帳號');
+        if ($row_check_username["count"] > 0) {
+            function_alert("該帳號已被使用，請選擇另一個帳號");
             exit;
         }
 
@@ -90,12 +91,12 @@
         $row_get_password = mysqli_fetch_assoc($result_get_password);
         $old_password_hash = $row_get_password["password"];
         if (password_verify($new_password, $old_password_hash)) {
-            function_alert('新密碼不能與舊密碼相同，請選擇另一個密碼');
+            function_alert("新密碼不能與舊密碼相同，請選擇另一個密碼");
             exit;
         }
 
         if ($new_password !== $confirm_password) {
-            function_alert('兩次密碼輸入不相同');
+            function_alert("兩次密碼輸入不相同");
             exit;
         }
 
@@ -103,9 +104,9 @@
         $sql = "UPDATE Users SET username = '$new_username', password = '$new_password_hash' WHERE id = '$user_id'";
         if (mysqli_query($conn, $sql)) {
             $_SESSION["username"] = $new_username;
-            function_alert('設置已更新');
+            function_alert("設置已更新");
         } else {
-            function_alert('更新時出錯：" . mysqli_error($conn) . "');
+            function_alert("更新時出錯：" . mysqli_error($conn) . "");
         }
     }
 

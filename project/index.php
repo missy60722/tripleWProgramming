@@ -1,7 +1,8 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>登入介面</title>
     <script>
@@ -37,6 +38,7 @@
             <input type="password" name="password" id="password" placeholder="密碼" required>
             <input type="submit" value="登入" name="submit" style="width: 100%">
             <a href="register.html">還沒有帳號？現在就註冊！</a>
+            <a href="forgot_password.html">忘記密碼</a>
         </form>
     </div>
     <?php

@@ -52,7 +52,8 @@ body {
 }
 
 .container input[type="text"],
-.container input[type="password"] {
+.container input[type="password"],
+.container input[type="email"] {
     width: 100%;
     color: #4c6e8b;
 }

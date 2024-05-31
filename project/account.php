@@ -7,22 +7,22 @@ $user_id = $_SESSION["id"];
 $order_by = "name";
 $table_header = "<th>項目</th><th>金額</th><th>日期</th><th>分類</th><th>類型</th><th>備註</th>";
 
-if (isset($_GET['type'])) {
-    $type = $_GET['type'];
+if (isset($_GET["type"])) {
+    $type = $_GET["type"];
     switch ($type) {
-        case 'type':
+        case "type":
             $order_by = "type";
             $table_header = "<th>類型</th><th>項目</th><th>金額</th><th>日期</th><th>分類</th><th>備註</th>";
             break;
-        case 'date':
+        case "date":
             $order_by = "created_at";
             $table_header = "<th>日期</th><th>項目</th><th>金額</th><th>分類</th><th>類型</th><th>備註</th>";
             break;
-        case 'category':
+        case "category":
             $order_by = "category";
             $table_header = "<th>分類</th><th>項目</th><th>金額</th><th>日期</th><th>類型</th><th>備註</th>";
             break;
-        case 'name':
+        case "name":
             $order_by = "name";
             $table_header = "<th>項目</th><th>金額</th><th>日期</th><th>分類</th><th>類型</th><th>備註</th>";
             break;
@@ -40,7 +40,8 @@ $result = mysqli_query($conn, $sql);
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>我的帳本</title>
     <style>
@@ -73,51 +74,51 @@ $result = mysqli_query($conn, $sql);
             </tr>
             <script>
                 function showByName() {
-                    window.location.href = 'account.php?type=name';
+                    window.location.href = "account.php?type=name";
                 }
                 function showByType() {
-                    window.location.href = 'account.php?type=type';
+                    window.location.href = "account.php?type=type";
                 }
 
                 function showByDate() {
-                    window.location.href = 'account.php?type=date';
+                    window.location.href = "account.php?type=date";
                 }
 
                 function showByCategory() {
-                    window.location.href = 'account.php?type=category';
+                    window.location.href = "account.php?type=category";
                 }
             </script>
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<tr>";
-                if ($type === 'type') {
-                    echo "<td>" . $row['type'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['amount'] . "</td>";
-                    echo "<td>" . $row['created_at'] . "</td>";
-                    echo "<td>" . $row['category'] . "</td>";
-                    echo "<td>" . $row['note'] . "</td>";
-                } elseif ($type === 'date') {
-                    echo "<td>" . $row['created_at'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['amount'] . "</td>";
-                    echo "<td>" . $row['category'] . "</td>";
-                    echo "<td>" . $row['type'] . "</td>";
-                    echo "<td>" . $row['note'] . "</td>";
-                } elseif ($type === 'category') {
-                    echo "<td>" . $row['category'] . "</td>";
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['amount'] . "</td>";
-                    echo "<td>" . $row['created_at'] . "</td>";
-                    echo "<td>" . $row['type'] . "</td>";
-                    echo "<td>" . $row['note'] . "</td>";
+                if ($type === "type") {
+                    echo "<td>" . $row["type"] . "</td>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["amount"] . "</td>";
+                    echo "<td>" . $row["created_at"] . "</td>";
+                    echo "<td>" . $row["category"] . "</td>";
+                    echo "<td>" . $row["note"] . "</td>";
+                } elseif ($type === "date") {
+                    echo "<td>" . $row["created_at"] . "</td>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["amount"] . "</td>";
+                    echo "<td>" . $row["category"] . "</td>";
+                    echo "<td>" . $row["type"] . "</td>";
+                    echo "<td>" . $row["note"] . "</td>";
+                } elseif ($type === "category") {
+                    echo "<td>" . $row["category"] . "</td>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["amount"] . "</td>";
+                    echo "<td>" . $row["created_at"] . "</td>";
+                    echo "<td>" . $row["type"] . "</td>";
+                    echo "<td>" . $row["note"] . "</td>";
                 } else {
-                    echo "<td>" . $row['name'] . "</td>";
-                    echo "<td>" . $row['amount'] . "</td>";
-                    echo "<td>" . $row['created_at'] . "</td>";
-                    echo "<td>" . $row['category'] . "</td>";
-                    echo "<td>" . $row['type'] . "</td>";
-                    echo "<td>" . $row['note'] . "</td>";
+                    echo "<td>" . $row["name"] . "</td>";
+                    echo "<td>" . $row["amount"] . "</td>";
+                    echo "<td>" . $row["created_at"] . "</td>";
+                    echo "<td>" . $row["category"] . "</td>";
+                    echo "<td>" . $row["type"] . "</td>";
+                    echo "<td>" . $row["note"] . "</td>";
                 }
                 echo "</tr>";
             }

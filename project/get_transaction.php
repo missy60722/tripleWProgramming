@@ -12,6 +12,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $transactions[] = $row;
 }
 
-header('Content-Type: application/json');
+header("Content-Type: application/json");
 echo json_encode($transactions);
 ?>

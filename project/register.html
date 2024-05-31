@@ -1,7 +1,8 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <title>會員註冊</title>
     <script>
@@ -12,11 +13,17 @@
 
         function validateForm() {
             let username = document.forms["registerForm"]["username"];
+            let email = document.forms["registerForm"]["email"];
             let password = document.forms["registerForm"]["password"];
             let confirmPassword = document.forms["registerForm"]["password_check"];
             if (username.value == "") {
                 alert("請輸入帳號");
                 username.focus();
+                return false;
+            }
+            if (email.value == "") {
+                alert("請輸入電子郵件");
+                email.focus();
                 return false;
             }
             if (password.value == "") {
@@ -26,12 +33,12 @@
             }
             if (password.value.length < 6) {
                 alert("密碼長度不足（長度需 >= 6）");
-                x.focus();
+                password.focus();
                 return false;
             }
             if (confirmPassword.value == "") {
                 alert("請再次輸入密碼");
-                y.focus();
+                confirmPassword.focus();
                 return false;
             }
             if (password.value !== confirmPassword.value) {
@@ -50,6 +57,7 @@
         <h2>註冊</h2>
         <form name="registerForm" method="post" action="register.php" onsubmit="return validateForm()">
             <input type="text" name="username" id="username" placeholder="帳號" required>
+            <input type="email" name="email" id="email" placeholder="電子郵件" required>
             <input type="password" name="password" id="password" placeholder="密碼" required>
             <input type="password" name="password_check" id="password_check" placeholder="確認密碼" required>
             <input type="submit" value="註冊" name="submit" style="width: 48%">
@@ -58,5 +66,4 @@
         </form>
     </div>
 </body>
-
 </html>
