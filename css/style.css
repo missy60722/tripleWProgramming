@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'ChenYuluoyan-Thin-Monospaced';
-    src: url(ChenYuluoyan-Thin-Monospaced.woff) format('woff');
+    font-family: "ChenYuluoyan-Thin-Monospaced";
+    src: url(ChenYuluoyan-Thin-Monospaced.woff) format("woff");
 }
 
 * {
-    font-family: 'ChenYuluoyan-Thin-Monospaced', sans-serif;
+    font-family: "ChenYuluoyan-Thin-Monospaced", sans-serif;
     font-size: 20px;
 }
 
@@ -53,7 +53,9 @@ body {
 
 .container input[type="text"],
 .container input[type="password"],
-.container input[type="email"] {
+.container input[type="email"],
+.container input[type="number"],
+.container input[type="date"] {
     width: 100%;
     color: #4c6e8b;
 }
@@ -125,6 +127,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 600px;
+    margin-left: 50px;
 }
 
 .account h2 {
@@ -164,6 +167,42 @@ body {
     transition: border-color 0.3s ease;
 }
 
+#categorySelect {
+    width: 45%;
+}
+
+#categoryInput {
+    width: 45%;
+    margin-left: 10px;
+}
+
+#categoryIcons {
+    display: inline-block;
+}
+
+#categoryIcons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-gap: 10px;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 .account input[type="submit"] {
     background-color: #4c6e8b;
     color: #fff;
@@ -178,8 +217,12 @@ body {
     background-color: #607b92;
 }
 
+.flatpickr-calendar {
+    font-family: "ChenYuluoyan-Thin-Monospaced", sans-serif;
+}
+
 .account-chart {
-    width: 500px;
+    width: 570px;
     height: 450px;
     margin: 20px 20px;
     padding: 20px;
@@ -273,6 +316,21 @@ tr:hover {
 
 tr:first-child:hover {
     background-color: #4c6e8b;
+}
+
+button {
+    background-color: #77a7d0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2668a2;
 }
 
 /* 統計數據 */

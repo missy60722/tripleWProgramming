@@ -4,8 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/zh.js"></script>
     <title>首頁</title>
     <script>
         function toggleOtherCategory() {
@@ -27,6 +31,7 @@
             let date = document.forms["accountForm"]["date"];
             let categorySelect = document.forms["accountForm"]["categorySelect"];
             let categoryInput = document.forms["accountForm"]["categoryInput"];
+            let hiddenCategoryInput = document.forms["accountForm"]["hiddenCategoryInput"];
             let type = document.forms["accountForm"]["type"];
 
             if (name.value == "") {
@@ -34,7 +39,7 @@
                 name.focus();
                 return false;
             }
-            if (amount.value == "" || isNaN(amount.value)) {
+            if (amount.value == "" || isNaN(amount.value) || amount.value < 0) {
                 alert("請輸入有效金額");
                 amount.focus();
                 return false;
@@ -44,7 +49,7 @@
                 date.focus();
                 return false;
             }
-            if (categorySelect.value === "" || (categorySelect.value === "其他" && categoryInput.value === "")) {
+            if ((categorySelect.value === "" && hiddenCategoryInput.value === "") || (categorySelect.value === "其他" && categoryInput.value === "")) {
                 alert("請選擇分類或輸入其他分類");
                 categorySelect.focus();
                 return false;
@@ -56,6 +61,39 @@
             }
             return true;
         }
+
+        $(document).ready(function () {
+            $(".category-icon").click(function () {
+                var icon = $(this).html();
+                var category = $(this).data("category");
+                var optionText = icon + " " + category;
+                $("#categorySelect option:selected").html(optionText);
+                $("#hiddenCategoryInput").val(category);
+            });
+
+            $(".category-icon").hover(
+                function (event) {
+                    var category = $(this).data("category");
+                    var tooltip = $("#categoryTooltip");
+                    tooltip.text(category)
+                        .css({ top: event.pageY + 10 + "px", left: event.pageX + 10 + "px", opacity: 1 })
+                },
+                function () {
+                    $("#categoryTooltip").css("opacity", 0);
+                }
+            );
+
+            $(".category-icon").mousemove(function (event) {
+                $("#categoryTooltip").css({ top: event.pageY + 10 + "px", left: event.pageX + 10 + "px" });
+            });
+
+            $("#date").flatpickr({
+                dateFormat: "Y-m-d",
+                defaultDate: new Date(),
+                locale: "zh"
+            });
+        })
+
     </script>
 </head>
 
@@ -68,7 +106,7 @@
         <a href="logout.php">登出</a>
     </aside>
 
-    <div id="chartTooltip" class="tooltip" style="opacity: 0;"></div>
+    <div id="chartTooltip" class="tooltip"></div>
 
     <div class="account">
         <h2>記帳</h2>
@@ -76,18 +114,42 @@
             <label for="name">項目名稱：</label>
             <input type="text" id="name" name="name" required>
             <label for="amount">金額：</label>
-            <input type="number" id="amount" name="amount" step="1" required>
+            <input type="number" id="amount" name="amount" step="1" min="0" required>
             <label for="date">日期：</label>
             <input type="date" id="date" name="date" required>
             <label for="category">分類：</label>
-            <select id="categorySelect" name="categorySelect" onchange="toggleOtherCategory()">
-                <option value="">選擇分類</option>
-                <option value="食物">食物</option>
-                <option value="交通">交通</option>
-                <option value="娛樂">娛樂</option>
-                <option value="其他">其他</option>
-            </select>
-            <input type="text" id="categoryInput" name="categoryInput" style="display: none;" placeholder="其他分類">
+            <div>
+                <select id="categorySelect" name="categorySelect" onchange="toggleOtherCategory()">
+                    <option value="">選擇分類</option>
+                    <option value="食物">&#127860;&nbsp;&nbsp;食物</option>
+                    <option value="服飾">&#128087;&nbsp;&nbsp;服飾</option>
+                    <option value="居家">&#127968;&nbsp;&nbsp;居家</option>
+                    <option value="交通">&#128646;&nbsp;&nbsp;交通</option>
+                    <option value="教育">&#127891;&nbsp;&nbsp;教育</option>
+                    <option value="娛樂">&#127908;&nbsp;&nbsp;娛樂</option>
+                    <option value="其他">&#8943;&nbsp;&nbsp;其他</option>
+                </select>
+                <input type="text" id="categoryInput" name="categoryInput" style="display: none;" placeholder="其他分類">
+                <input type="hidden" id="hiddenCategoryInput" name="hiddenCategoryInput" value="">
+                <div id="categoryIcons">
+                    <span class="category-icon" data-category="早餐">&#127838;</span>
+                    <span class="category-icon" data-category="午餐">&#127858;</span>
+                    <span class="category-icon" data-category="晚餐">&#127829;</span>
+                    <span class="category-icon" data-category="禮物">&#127873;</span>
+                    <span class="category-icon" data-category="日常用品">&#128722;</span>
+                    <span class="category-icon" data-category="運動">&#127936;</span>
+                    <span class="category-icon" data-category="水電瓦斯">&#128161;</span>
+                    <span class="category-icon" data-category="電信">&#128241;</span>
+                    <span class="category-icon" data-category="美容美髮">&#128132;</span>
+                    <span class="category-icon" data-category="交際應酬">&#127867;</span>
+                    <span class="category-icon" data-category="學習">&#128214;</span>
+                    <span class="category-icon" data-category="醫療保健">&#128138;</span>
+                    <span class="category-icon" data-category="寵物">&#128054;</span>
+                    <span class="category-icon" data-category="轉帳手續費">&#127974;</span>
+                    <span class="category-icon" data-category="旅遊">&#127958;</span>
+                </div>
+                <div id="categoryTooltip" class="tooltip"></div>
+            </div>
             <label for="type">類型:：</label>
             <select id="type" name="type" required>
                 <option value="支出">支出</option>

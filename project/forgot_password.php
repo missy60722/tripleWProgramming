@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
     $sql = "SELECT id FROM Users WHERE email='$email'";
-    $result = mysqli_query($link, $sql);
+    $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         function generateRandomPassword($length = 8)
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         $updateSql = "UPDATE Users SET password='$hashedPassword' WHERE email='$email'";
-        if (mysqli_query($link, $updateSql) === TRUE) {
+        if (mysqli_query($conn, $updateSql) === TRUE) {
             $mail = new PHPMailer(true);
             try {
 
@@ -66,14 +66,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         } else {
             $response["status"] = "error";
-            $response["message"] = "更新密碼時出錯: " . mysqli_error($link);
+            $response["message"] = "更新密碼時出錯: " . mysqli_error($conn);
         }
     } else {
         $response["status"] = "error";
         $response["message"] = "沒找到該電子郵件地址對應的使用者，請重新輸入。";
     }
 
-    mysqli_close($link);
+    mysqli_close($conn);
 
     echo json_encode($response);
 }

@@ -9,6 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($_POST["categorySelect"] === "其他") {
         $category = $_POST["categoryInput"];
+    } else if ($_POST["categorySelect"] === "") {
+        $category = $_POST["hiddenCategoryInput"];
     } else {
         $category = $_POST["categorySelect"];
     }
