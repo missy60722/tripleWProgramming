@@ -14,4 +14,4 @@ if($link === false){
 else{
     return $link;
 }
-?>
+

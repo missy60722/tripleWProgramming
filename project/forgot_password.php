@@ -12,8 +12,6 @@ $dotenv->load();
 
 $conn = require_once "config.php";
 
-$response = array("status" => "", "message" => "");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
 
@@ -39,7 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_query($conn, $updateSql) === TRUE) {
             $mail = new PHPMailer(true);
             try {
-
                 $mail->isSMTP();
                 $mail->Host = "smtp.gmail.com";
                 $mail->SMTPAuth = true;
@@ -58,23 +55,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->AltBody = "親愛的使用者,\n\n您的新密碼為: $newPassword\n請使用此密碼登入並立即修改您的密碼。\n\n謝謝!";
 
                 $mail->send();
-                $response["status"] = "success";
-                $response["message"] = "已將密碼郵件發送至您的信箱，登入後請立即修改密碼。";
+                echo "<script>alert('已將密碼郵件發送至您的信箱，登入後請立即修改密碼。'); window.location.href = 'index.php';</script>";
             } catch (Exception $e) {
-                $response["status"] = "error";
-                $response["message"] = "發送郵件失敗。郵件伺服器錯誤: {$mail->ErrorInfo}";
+                $alertMessage = "發送郵件失敗。郵件伺服器錯誤: {$mail->ErrorInfo}";
             }
         } else {
-            $response["status"] = "error";
-            $response["message"] = "更新密碼時出錯: " . mysqli_error($conn);
+            $alertMessage = "更新密碼時出錯: " . mysqli_error($conn);
         }
     } else {
-        $response["status"] = "error";
-        $response["message"] = "沒找到該電子郵件地址對應的使用者，請重新輸入。";
+        $alertMessage = "沒找到該電子郵件地址對應的使用者，請重新輸入。";
     }
 
     mysqli_close($conn);
 
-    echo json_encode($response);
+    echo "<script>alert('$alertMessage'); window.location.href = 'forgot_password.html';</script>";
 }
-?>

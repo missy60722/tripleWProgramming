@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         function_alert("帳號或密碼錯誤！");
     }
 } else {
-    function_alert("Something wrong");
+    function_alert("登入失敗，請再試一次！");
 }
 
 mysqli_close($conn);
@@ -31,4 +31,3 @@ function function_alert($message)
      window.location.href='index.php';</script>";
     return false;
 }
-?>

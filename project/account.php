@@ -70,6 +70,7 @@ $result = mysqli_query($conn, $sql);
             width: 80%;
             max-width: 800px;
         }
+
         #transactionForm {
             display: none;
         }
@@ -80,7 +81,7 @@ $result = mysqli_query($conn, $sql);
     <aside class="sidebar">
         <a href="home.html">記帳</a>
         <a href="account.php">我的帳本</a>
-        <a href="report.php">統計數據</a>
+        <a href="report.html">統計數據</a>
         <a href="setting.php">設置</a>
         <a href="logout.php">登出</a>
     </aside>
@@ -138,6 +139,10 @@ $result = mysqli_query($conn, $sql);
                     document.getElementById("name").focus();
                 }
 
+                function confirmDelete() {
+                    return confirm("確定要刪除這筆交易嗎？");
+                }
+
                 document.addEventListener("DOMContentLoaded", function () {
                     flatpickr("#date", {
                         dateFormat: "Y-m-d",
@@ -180,7 +185,7 @@ $result = mysqli_query($conn, $sql);
                 }
                 echo "<td>
                         <button onclick=\"editTransaction('" . $row["id"] . "', '" . $row["name"] . "', '" . $row["amount"] . "', '" . $row["created_at"] . "', '" . $row["category"] . "', '" . $row["type"] . "', '" . $row["note"] . "')\">編輯</button>
-                        <form action='account.php' method='POST' style='display:inline;'>
+                        <form action='account.php' method='POST' style='display:inline;' onsubmit='return confirmDelete();'>
                             <input type='hidden' name='id' value='" . $row["id"] . "'>
                             <button type='submit' name='delete'>刪除</button>
                         </form>
